@@ -205,11 +205,10 @@ jobs:
       - run:
           name: Add back-end ip to ansible inventory
           command: |
-            cat inventory.txt
-            cd .circleci/ansible
-            aws ec2 describe-instances \
+            echo $(aws ec2 describe-instances \
             --query 'Reservations[*].Instances[*].PublicIpAddress' \
-            --output text >> ~/project/.circleci/ansible/inventory.txt
+            --filters 'Name=tag:project,Values=udapeople' \
+            --output text) >> ~/project/.circleci/ansible/inventory.txt
             cat ~/project/.circleci/ansible/inventory.txt
       - persist_to_workspace:
           root: ~/
@@ -220,14 +219,13 @@ jobs:
 
   configure-infrastructure:
     docker:
-      # Docker image here that supports Ansible
       - image: amazon/aws-cli
     steps:
       # Checkout code from git
       - checkout
       # Add ssh keys with fingerprint
       - add_ssh_keys:
-          fingerprints: ["33:bb:5c:2c:00:9e:74:94:7b:f7:87:8e:69:2f:e2:b5"]
+          fingerprints: ["53:53:da:86:29:7c:3c:80:b0:78:36:05:23:75:44:52"]
       - run:
           name: install utility
           command: |
@@ -285,7 +283,7 @@ jobs:
     steps:
       # Checkout code from git
       - add_ssh_keys:
-          fingerprints: ["33:bb:5c:2c:00:9e:74:94:7b:f7:87:8e:69:2f:e2:b5"]
+          fingerprints: ["53:53:da:86:29:7c:3c:80:b0:78:36:05:23:75:44:52"]
       - checkout
       - install_awscli
       - install_nodejs
@@ -318,7 +316,7 @@ jobs:
     steps:
       - checkout
       - add_ssh_keys:
-          fingerprints: ["33:bb:5c:2c:00:9e:74:94:7b:f7:87:8e:69:2f:e2:b5"]
+          fingerprints: ["53:53:da:86:29:7c:3c:80:b0:78:36:05:23:75:44:52"]
       - install_nodejs
       - install_awscli
       - install_ansible  
