@@ -1,0 +1,4 @@
+URL01: https://github.com/Zeighnab/cdond-c3-projectstarter
+URL02: http://udapeople-edfed7a.s3-website-us-east-1.amazonaws.com/#/employees
+URL03: https://dr2qvpst91e1n.cloudfront.net/#/employees
+URL05: http://ec2-18-207-206-124.compute-1.amazonaws.com:9090/graph
